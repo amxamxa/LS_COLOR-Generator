@@ -7,19 +7,25 @@
     <style>
         @font-face {
             font-family: 'Keypunch029';
-            src: url('https://fontlibrary.org/assets/fonts/keypunch029/378f6e551ba0c06c60f46c26b58bbf34/98cc1db253f87b400fb11ce2e2a67d62/Keypunch029Regular.otf') format('opentype');
+            src: url('https://fontlibrary.org//face/keypunch029') format('opentype');
             font-weight: bold;
         }
         
         @font-face {
             font-family: 'Cyanotype';
-            src: url('https://fontlibrary.org/assets/fonts/cyanotype/c88a34ba0a5a8d37a04e24c6c10a2748/f83319f735fb3547b1e5e3507f5faa68/CyanotypeMedium.otf') format('opentype');
+            src: url('https://fontlibrary.org//face/cyanotype') format('opentype');
             font-weight: bold;
         }
         
         @font-face {
             font-family: 'Poorfish';
-            src: url('https://fontlibrary.org/assets/fonts/poorfish/4f87a6b479ba87fcc2b3d0536caf4c3a/caa6a42dcfc7d71c79c7d76e023a7daf/PoorfishRegular.otf') format('opentype');
+            src: url('https://fontlibrary.org//face/poorfish') format('opentype');
+            font-weight: normal;
+        }
+        
+        @font-face {
+            font-family: 'CoderNarrow';
+            src: url('https://fontlibrary.org//face/coder-narrow') format('opentype');
             font-weight: normal;
         }
         
@@ -30,7 +36,7 @@
         }
         
         body {
-            font-family: 'Courier New', 'Lucida Console', monospace;
+            font-family: 'CoderNarrow', 'Courier New', 'Lucida Console', monospace;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -120,7 +126,7 @@
             padding: 15px;
             border: 2px solid #ddd;
             border-radius: 8px;
-            font-family: 'Courier New', monospace;
+            font-family: 'CoderNarrow', 'Courier New', monospace;
             font-size: 13px;
             resize: vertical;
             transition: border-color 0.3s, background 0.3s, color 0.3s;
@@ -156,7 +162,7 @@
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s;
-            font-family: 'Courier New', 'Lucida Console', monospace;
+            font-family: 'CoderNarrow', 'Courier New', 'Lucida Console', monospace;
         }
         
         .btn-primary {
@@ -221,8 +227,7 @@
         }
         
         tr:nth-child(even) {
-            background: #2a2a2a;
-            color: white;
+            background: #f9f9f9;
         }
         
         body.dark-mode tr:nth-child(odd) {
@@ -236,19 +241,13 @@
         }
         
         tr:nth-child(even) select {
+            background: #f9f9f9;
+        }
+        
+        body.dark-mode tr:nth-child(even) select {
             background: #3a3a3a;
             color: white;
             border-color: #555;
-        }
-        
-        tr:hover {
-            background: #e8ebff !important;
-            color: #333 !important;
-        }
-        
-        tr:hover select {
-            background: white !important;
-            color: #333 !important;
         }
         
         select {
@@ -279,7 +278,7 @@
         }
         
         .preview-cell {
-            font-family: 'Courier New', monospace;
+            font-family: 'CoderNarrow', 'Courier New', monospace;
             font-weight: bold;
             padding: 8px 12px;
             border-radius: 4px;
@@ -293,16 +292,24 @@
         }
         
         tr:nth-child(even) .category {
-            color: #ddd;
+            color: #555;
+        }
+        
+        body.dark-mode .category {
+            color: #b0b0b0;
         }
         
         .extension {
-            font-family: 'Courier New', monospace;
+            font-family: 'CoderNarrow', 'Courier New', monospace;
             color: #764ba2;
             font-weight: 600;
         }
         
         tr:nth-child(even) .extension {
+            color: #764ba2;
+        }
+        
+        body.dark-mode .extension {
             color: #a78bff;
         }
         
@@ -335,7 +342,7 @@
             font-size: 12px;
             color: #666;
             margin-top: 5px;
-            font-family: 'Courier New', 'Lucida Console', monospace;
+            font-family: 'CoderNarrow', 'Courier New', 'Lucida Console', monospace;
         }
         
         .filter-section {
@@ -348,7 +355,7 @@
             border: 2px solid #ddd;
             border-radius: 6px;
             font-size: 14px;
-            font-family: 'Courier New', 'Lucida Console', monospace;
+            font-family: 'CoderNarrow', 'Courier New', 'Lucida Console', monospace;
             transition: background 0.3s, color 0.3s, border-color 0.3s;
         }
         
@@ -369,7 +376,7 @@
             border-radius: 6px;
             color: #c33;
             margin-bottom: 20px;
-            font-family: 'Courier New', 'Lucida Console', monospace;
+            font-family: 'CoderNarrow', 'Courier New', 'Lucida Console', monospace;
         }
         
         .success {
@@ -379,7 +386,7 @@
             border-radius: 6px;
             color: #3c3;
             margin-bottom: 20px;
-            font-family: 'Courier New', 'Lucida Console', monospace;
+            font-family: 'CoderNarrow', 'Courier New', 'Lucida Console', monospace;
         }
     </style>
 </head>
@@ -471,30 +478,291 @@
             { label: 'Blue BG', value: '48;2;102;217;239' }
         ];
         
-        // Enhanced category mapping
+        // Enhanced category mapping based on analysis of LS_COLORS files
         const categoryMap = {
-            'c': 'Source Code (C)', 'h': 'Source Code (C/C++)',
-            'cpp': 'Source Code (C++)', 'cc': 'Source Code (C++)', 'cxx': 'Source Code (C++)',
-            'hpp': 'Source Code (C++)', 'hh': 'Source Code (C++)', 'hxx': 'Source Code (C++)',
-            'py': 'Source Code (Python)', 'js': 'Source Code (JavaScript)', 'jsx': 'Source Code (React/JSX)',
-            'ts': 'Source Code (TypeScript)', 'tsx': 'Source Code (TypeScript/React)',
-            'java': 'Source Code (Java)', 'cs': 'Source Code (C#)', 'go': 'Source Code (Go)',
-            'rs': 'Source Code (Rust)', 'php': 'Source Code (PHP)', 'rb': 'Source Code (Ruby)',
-            'pl': 'Source Code (Perl)', 'lua': 'Source Code (Lua)', 'sh': 'Shell (sh)',
-            'bash': 'Shell (bash)', 'zsh': 'Shell (zsh)', 'fish': 'Shell (fish)',
-            'html': 'Web (HTML)', 'css': 'Web (CSS)', 'scss': 'Web (SCSS)',
-            'zip': 'Archive', 'tar': 'Archive', 'gz': 'Archive', 'bz2': 'Archive', '7z': 'Archive',
-            'txt': 'Text', 'md': 'Markup (Markdown)', 'pdf': 'Dokument (PDF)',
-            'doc': 'Dokument (Word)', 'docx': 'Dokument (Word)',
-            'jpg': 'Bild (JPEG)', 'png': 'Bild (PNG)', 'gif': 'Bild (GIF)', 'svg': 'Bild (SVG)',
-            'mp4': 'Video (MP4)', 'mkv': 'Video (MKV)', 'avi': 'Video (AVI)',
-            'mp3': 'Audio (MP3)', 'flac': 'Audio (FLAC)', 'wav': 'Audio (WAV)',
-            'conf': 'Konfiguration', 'config': 'Konfiguration', 'cfg': 'Konfiguration',
-            'ini': 'Konfiguration', 'yaml': 'Konfiguration', 'yml': 'Konfiguration',
-            'toml': 'Konfiguration', 'json': 'Konfiguration', 'xml': 'Konfiguration',
-            'nix': 'Konfiguration (Nix)', 'mk': 'Build', 'cmake': 'Build',
-            'exe': 'Executable', 'bin': 'Executable', 'so': 'Library', 'dll': 'Library',
-            'tmp': 'Temporär', 'log': 'Log', 'bak': 'Backup'
+            // Programming Languages
+            'c': 'C Source Code', 'h': 'C Header', 
+            'cpp': 'C++ Source Code', 'cc': 'C++ Source Code', 'cxx': 'C++ Source Code',
+            'hpp': 'C++ Header', 'hh': 'C++ Header', 'hxx': 'C++ Header',
+            'py': 'Python Source Code', 'pyc': 'Python Bytecode', 'pyd': 'Python Extension', 'pyo': 'Python Optimized',
+            'js': 'JavaScript Source Code', 'jsx': 'React/JSX Source Code',
+            'ts': 'TypeScript Source Code', 'tsx': 'TypeScript/React Source Code',
+            'java': 'Java Source Code', 'class': 'Java Bytecode',
+            'cs': 'C# Source Code', 'csx': 'C# Script',
+            'go': 'Go Source Code', 'mod': 'Go Module',
+            'rs': 'Rust Source Code', 'rlib': 'Rust Library',
+            'php': 'PHP Source Code', 
+            'rb': 'Ruby Source Code', 'gemspec': 'Ruby Gem Specification',
+            'pl': 'Perl Source Code', 'pm': 'Perl Module',
+            'lua': 'Lua Source Code',
+            'swift': 'Swift Source Code',
+            'kt': 'Kotlin Source Code', 'kts': 'Kotlin Script',
+            'scala': 'Scala Source Code',
+            'clj': 'Clojure Source Code',
+            'elm': 'Elm Source Code', 'el': 'Emacs Lisp Source Code', 'elc': 'Emacs Lisp Bytecode',
+            'hs': 'Haskell Source Code', 'hi': 'Haskell Interface',
+            'ml': 'OCaml Source Code', 'mli': 'OCaml Interface',
+            'fs': 'F# Source Code', 'fsi': 'F# Interface', 'fsx': 'F# Script',
+            'vb': 'Visual Basic Source Code',
+            'asm': 'Assembly Source Code',
+            's': 'Assembly Source Code',
+            'v': 'Verilog Source Code',
+            'vhd': 'VHDL Source Code',
+            'zig': 'Zig Source Code',
+            'nim': 'Nim Source Code', 'nims': 'Nim Script', 'nimble': 'Nim Package',
+            'cr': 'Crystal Source Code',
+            'd': 'D Source Code',
+            'dart': 'Dart Source Code',
+            'jl': 'Julia Source Code',
+            'r': 'R Source Code',
+            'm': 'Objective-C Source Code',
+            'mm': 'Objective-C++ Source Code',
+            'ada': 'Ada Source Code', 'adb': 'Ada Body', 'ads': 'Ada Specification',
+            'pas': 'Pascal Source Code',
+            'f': 'Fortran Source Code', 'f90': 'Fortran 90 Source Code',
+            'pro': 'Prolog Source Code',
+            'erl': 'Erlang Source Code',
+            'ex': 'Elixir Source Code', 'exs': 'Elixir Script',
+            'mojo': 'Mojo Source Code',
+            'prql': 'PRQL Source Code',
+            'raku': 'Raku Source Code',
+            'purs': 'PureScript Source Code',
+            
+            // Scripting/Shell
+            'sh': 'Shell Script', 'bash': 'Bash Script', 'zsh': 'Zsh Script', 'fish': 'Fish Script',
+            'ps1': 'PowerShell Script', 'psd1': 'PowerShell Data', 'psm1': 'PowerShell Module',
+            'bat': 'Batch Script', 'cmd': 'Command Script',
+            'tcl': 'Tcl Script',
+            'awk': 'AWK Script',
+            'sed': 'Sed Script',
+            'applescript': 'AppleScript',
+            
+            // Web Technologies
+            'html': 'HTML Document', 'htm': 'HTML Document', 'xhtml': 'XHTML Document', 'shtml': 'Server HTML',
+            'css': 'CSS Stylesheet', 'scss': 'SCSS Stylesheet', 'sass': 'SASS Stylesheet', 'less': 'LESS Stylesheet',
+            'xml': 'XML Document',
+            'json': 'JSON Data',
+            'yaml': 'YAML Document', 'yml': 'YAML Document',
+            'toml': 'TOML Document',
+            'svg': 'SVG Image',
+            'webmanifest': 'Web App Manifest',
+            
+            // Documents
+            'txt': 'Text Document',
+            'md': 'Markdown Document', 'markdown': 'Markdown Document', 'mdown': 'Markdown Document',
+            'rst': 'reStructuredText Document',
+            'tex': 'LaTeX Document', 'ltx': 'LaTeX Document', 'sty': 'LaTeX Style', 'aux': 'LaTeX Auxiliary', 
+            'bbl': 'LaTeX Bibliography', 'bcf': 'LaTeX BCF', 'blg': 'LaTeX Blog', 'fdb_latexmk': 'LaTeX Make',
+            'fls': 'LaTeX File List', 'synctex.gz': 'LaTeX SyncTeX',
+            'pdf': 'PDF Document',
+            'doc': 'Word Document', 'docx': 'Word Document',
+            'ppt': 'PowerPoint Presentation', 'pptx': 'PowerPoint Presentation',
+            'xls': 'Excel Spreadsheet', 'xlsx': 'Excel Spreadsheet',
+            'odt': 'OpenDocument Text', 'ods': 'OpenDocument Spreadsheet', 'odp': 'OpenDocument Presentation',
+            'rtf': 'Rich Text Format',
+            'epub': 'EPUB Ebook',
+            
+            // Images
+            'jpg': 'JPEG Image', 'jpeg': 'JPEG Image', 'jxl': 'JPEG XL Image',
+            'png': 'PNG Image',
+            'gif': 'GIF Image',
+            'bmp': 'Bitmap Image',
+            'tiff': 'TIFF Image', 'tif': 'TIFF Image',
+            'webp': 'WebP Image',
+            'ico': 'Icon Image',
+            'svg': 'SVG Image',
+            'psd': 'Photoshop Document',
+            'ai': 'Adobe Illustrator',
+            'eps': 'Encapsulated PostScript',
+            'raw': 'RAW Image', 'cr2': 'Canon RAW', 'cr3': 'Canon RAW', 'arw': 'Sony RAW', 'nef': 'Nikon RAW',
+            'dng': 'Digital Negative', 'orf': 'Olympus RAW', 'rw2': 'Panasonic RAW', 'rwl': 'Leica RAW',
+            '3fr': 'Hasselblad RAW', 'ari': 'ARRIRAW', 'srf': 'Sony RAW', 'sr2': 'Sony RAW', 'srw': 'Samsung RAW',
+            'kdc': 'Kodak RAW', 'dcs': 'Kodak RAW', 'dcr': 'Kodak RAW', 'drf': 'Kodak RAW',
+            'mef': 'Mamiya RAW', 'mrw': 'Minolta RAW', 'nrw': 'Nikon RAW', 'pef': 'Pentax RAW',
+            'ptx': 'Pentax RAW', 'pxn': 'Logitech RAW', 'r3d': 'Red RAW', 'raf': 'Fuji RAW',
+            'cap': 'Phase One RAW', 'iiq': 'Phase One RAW', 'eip': 'Phase One RAW',
+            'erf': 'Epson RAW', 'fff': 'Imacon RAW', 'mos': 'Leaf RAW', 'nrw': 'Nikon RAW',
+            'avif': 'AVIF Image', 'heif': 'HEIF Image', 'qoi': 'QOI Image',
+            'x3f': 'Sigma RAW', 'xmp': 'XMP Metadata',
+            
+            // 3D & CAD
+            'blend': 'Blender File',
+            'obj': 'Wavefront OBJ',
+            'stl': 'STL 3D Model',
+            'fbx': 'FBX 3D Model',
+            'dae': 'Collada 3D Model',
+            '3ds': '3D Studio Scene',
+            '3mf': '3D Manufacturing Format',
+            'amf': 'Additive Manufacturing File',
+            'step': 'STEP 3D Model', 'stp': 'STEP 3D Model',
+            'iges': 'IGES 3D Model', 'igs': 'IGES 3D Model',
+            'scad': 'OpenSCAD Script',
+            'mtl': 'Wavefront Material',
+            'wrl': 'VRML World',
+            'x3d': 'X3D File',
+            'usd': 'USD Scene', 'usda': 'USD Scene', 'usdc': 'USD Scene', 'usdz': 'USD Scene',
+            
+            // Audio
+            'mp3': 'MP3 Audio',
+            'wav': 'WAV Audio',
+            'flac': 'FLAC Audio',
+            'aif': 'AIFF Audio',
+            'ogg': 'Ogg Vorbis Audio',
+            'm4a': 'MPEG-4 Audio',
+            'wma': 'Windows Media Audio',
+            'ape': 'Monkey\'s Audio',
+            'mid': 'MIDI Audio',
+            'opus': 'Opus Audio',
+            
+            // Video
+            'mp4': 'MPEG-4 Video',
+            'avi': 'AVI Video',
+            'mkv': 'Matroska Video',
+            'mov': 'QuickTime Video',
+            'wmv': 'Windows Media Video',
+            'flv': 'Flash Video',
+            'webm': 'WebM Video',
+            'm4v': 'MPEG-4 Video',
+            'mpg': 'MPEG Video', 'mpeg': 'MPEG Video',
+            'ogv': 'Ogg Video',
+            'vob': 'DVD Video',
+            'swf': 'Flash Movie',
+            'h264': 'H.264 Video',
+            
+            // Archives
+            'zip': 'ZIP Archive',
+            'tar': 'TAR Archive',
+            'gz': 'GZIP Archive',
+            'bz2': 'BZIP2 Archive',
+            'xz': 'XZ Archive',
+            '7z': '7-Zip Archive',
+            'rar': 'RAR Archive',
+            'arj': 'ARJ Archive',
+            'zst': 'Zstandard Archive',
+            'tbz': 'Tar BZIP2 Archive', 'tbz2': 'Tar BZIP2 Archive',
+            'tgz': 'Tar GZIP Archive',
+            
+            // Executables & Libraries
+            'exe': 'Windows Executable',
+            'com': 'DOS Executable',
+            'app': 'macOS Application',
+            'deb': 'Debian Package',
+            'rpm': 'RPM Package',
+            'pkg': 'macOS Package',
+            'msi': 'Windows Installer',
+            'apk': 'Android Package',
+            'dmg': 'macOS Disk Image',
+            'iso': 'ISO Disk Image',
+            'img': 'Disk Image',
+            'toast': 'Toast Disk Image',
+            'xbps': 'Void Linux Package',
+            'so': 'Shared Library',
+            'dll': 'Dynamic Link Library',
+            'dylib': 'macOS Dynamic Library',
+            'ko': 'Kernel Module',
+            'bin': 'Binary File',
+            'vcd': 'Virtual CD',
+            'bag': 'ROS Bag File',
+            
+            // Configuration
+            'conf': 'Configuration File',
+            'config': 'Configuration File',
+            'cfg': 'Configuration File',
+            'ini': 'INI Configuration',
+            'properties': 'Properties File',
+            'env': 'Environment File',
+            'gitconfig': 'Git Configuration',
+            'gitignore': 'Git Ignore',
+            'gitattributes': 'Git Attributes',
+            'gitmodules': 'Git Submodules',
+            'hgrc': 'Mercurial Configuration',
+            'dockerfile': 'Dockerfile',
+            'makefile': 'Makefile', 'mk': 'Makefile',
+            'cmake': 'CMake File', 'cmake.in': 'CMake Input',
+            'sconstruct': 'SCons Build', 'sconscript': 'SCons Script',
+            'gradle': 'Gradle Build',
+            'flake8': 'Flake8 Configuration',
+            'editorconfig': 'EditorConfig',
+            'clang-format': 'Clang Format',
+            'nix': 'Nix Expression',
+            'toml': 'TOML Configuration',
+            'yaml': 'YAML Configuration', 'yml': 'YAML Configuration',
+            'json': 'JSON Configuration',
+            'xml': 'XML Configuration',
+            'desktop': 'Desktop Entry',
+            'plist': 'Property List',
+            'reg': 'Windows Registry',
+            
+            // Development & Build
+            'o': 'Object File',
+            'a': 'Static Library',
+            'lo': 'Libtool Object',
+            'la': 'Libtool Archive',
+            'bc': 'LLVM Bitcode',
+            'll': 'LLVM IR',
+            'hi': 'Haskell Interface',
+            'pyc': 'Python Bytecode',
+            'class': 'Java Bytecode',
+            'rlib': 'Rust Library',
+            'dyn_o': 'Dynamic Object',
+            'dyn_hi': 'Dynamic Interface',
+            'rmeta': 'Rust Metadata',
+            
+            // Data & Databases
+            'db': 'Database File',
+            'sql': 'SQL Script',
+            'csv': 'CSV Data',
+            'tsv': 'TSV Data',
+            'data': 'Data File',
+            
+            // Temporary & System
+            'tmp': 'Temporary File',
+            'temp': 'Temporary File',
+            'swp': 'Swap File',
+            'swo': 'Swap File',
+            'pid': 'Process ID',
+            'lock': 'Lock File',
+            'cache': 'Cache File',
+            'log': 'Log File',
+            'out': 'Output File',
+            'bak': 'Backup File',
+            'orig': 'Original Backup',
+            'ds_store': 'DS_Store File',
+            'localized': 'Localized Resource',
+            'cfsusertextencoding': 'CFUserTextEncoding',
+            'scons_opt': 'SCons Options',
+            'timestamp': 'Timestamp File',
+            'sconsign.dblite': 'SCons Database',
+            'fdb_latexmk': 'LaTeX Make Database',
+            'ctags': 'Ctags File',
+            
+            // Documentation
+            'readme': 'README', 'readme.md': 'README', 'readme.txt': 'README',
+            'changelog': 'Changelog', 'changelog.md': 'Changelog', 'changelog.txt': 'Changelog',
+            'license': 'License', 'licence': 'License', 'license-mit': 'MIT License', 'license-apache': 'Apache License',
+            'copying': 'Copying',
+            'copyright': 'Copyright',
+            'authors': 'Authors',
+            'contributing': 'Contributing', 'contributing.md': 'Contributing', 'contributing.txt': 'Contributing',
+            'contributors': 'Contributors', 'contributors.md': 'Contributors', 'contributors.txt': 'Contributors',
+            'code_of_conduct': 'Code of Conduct', 'code_of_conduct.md': 'Code of Conduct', 'code_of_conduct.txt': 'Code of Conduct',
+            'codeowners': 'Code Owners',
+            'notice': 'Notice',
+            'version': 'Version',
+            'install': 'Install', 'install.md': 'Install', 'install.txt': 'Install',
+            'manifest.in': 'Manifest',
+            'doxyfile': 'Doxygen Configuration',
+            'todo': 'TODO', 'todo.md': 'TODO', 'todo.txt': 'TODO',
+            'faq': 'FAQ',
+            'legacy': 'Legacy',
+            
+            // Other
+            'passwd': 'Password File',
+            'shadow': 'Shadow File',
+            'stdin': 'Standard Input',
+            'stdout': 'Standard Output',
+            'stderr': 'Standard Error',
+            'icon': 'Icon File'
         };
         
         // Special keys
@@ -503,22 +771,75 @@
             'bd': 'Block Device', 'cd': 'Character Device', 'pi': 'FIFO/Pipe',
             'so': 'Socket', 'or': 'Orphan Link', 'mi': 'Missing',
             'su': 'Setuid', 'sg': 'Setgid', 'tw': 'Sticky Other-Writable',
-            'ow': 'Other-Writable', 'st': 'Sticky'
+            'ow': 'Other-Writable', 'st': 'Sticky', 'no': 'Normal',
+            'mh': 'Multi-Hardlink', 'ca': 'Capability', 'rs': 'Reset',
+            'do': 'Door', '~': 'Backup File'
         };
         
-        // Category order
+        // Category order for sorting
         const categoryOrder = [
             'Directory', 'Symlink', 'Executable', 'File',
             'Block Device', 'Character Device', 'FIFO/Pipe', 'Socket',
-            'Konfiguration', 'Konfiguration (Nix)',
-            'Source Code (C)', 'Source Code (C++)', 'Source Code (Python)',
-            'Source Code (JavaScript)', 'Source Code (TypeScript)',
-            'Archive', 'Text', 'Markup (Markdown)',
-            'Dokument (PDF)', 'Dokument (Word)',
-            'Bild (JPEG)', 'Bild (PNG)', 'Bild (SVG)',
-            'Video (MP4)', 'Audio (MP3)',
-            'Build', 'Library', 'Temporär', 'Log', 'Backup',
-            'Pattern', 'Sonstige Datei'
+            'Orphan Link', 'Missing', 'Setuid', 'Setgid', 
+            'Sticky Other-Writable', 'Other-Writable', 'Sticky', 'Normal',
+            'Multi-Hardlink', 'Capability', 'Reset', 'Door',
+            'Backup File',
+            'Configuration File', 'Git Configuration', 'Dockerfile', 'Makefile',
+            'C Source Code', 'C++ Source Code', 'Python Source Code', 
+            'JavaScript Source Code', 'TypeScript Source Code', 'Java Source Code',
+            'C# Source Code', 'Go Source Code', 'Rust Source Code', 'PHP Source Code',
+            'Ruby Source Code', 'Perl Source Code', 'Lua Source Code', 'Swift Source Code',
+            'Kotlin Source Code', 'Scala Source Code', 'Clojure Source Code', 'Elm Source Code',
+            'Emacs Lisp Source Code', 'Haskell Source Code', 'OCaml Source Code', 'F# Source Code',
+            'Visual Basic Source Code', 'Assembly Source Code', 'Verilog Source Code', 'VHDL Source Code',
+            'Zig Source Code', 'Nim Source Code', 'Crystal Source Code', 'D Source Code',
+            'Dart Source Code', 'Julia Source Code', 'R Source Code', 'Objective-C Source Code',
+            'Objective-C++ Source Code', 'Ada Source Code', 'Pascal Source Code', 'Fortran Source Code',
+            'Prolog Source Code', 'Erlang Source Code', 'Elixir Source Code', 'Mojo Source Code',
+            'PRQL Source Code', 'Raku Source Code', 'PureScript Source Code',
+            'Shell Script', 'Bash Script', 'Zsh Script', 'Fish Script',
+            'PowerShell Script', 'Batch Script', 'Tcl Script', 'AWK Script',
+            'Sed Script', 'AppleScript',
+            'HTML Document', 'CSS Stylesheet', 'SCSS Stylesheet', 'SASS Stylesheet', 'LESS Stylesheet',
+            'XML Document', 'JSON Data', 'YAML Document', 'TOML Document', 'SVG Image',
+            'Web App Manifest',
+            'Text Document', 'Markdown Document', 'reStructuredText Document',
+            'LaTeX Document', 'PDF Document', 'Word Document', 'PowerPoint Presentation',
+            'Excel Spreadsheet', 'OpenDocument Text', 'OpenDocument Spreadsheet', 'OpenDocument Presentation',
+            'Rich Text Format', 'EPUB Ebook',
+            'JPEG Image', 'PNG Image', 'GIF Image', 'Bitmap Image', 'TIFF Image', 'WebP Image',
+            'Icon Image', 'Photoshop Document', 'Adobe Illustrator', 'Encapsulated PostScript',
+            'RAW Image', 'AVIF Image', 'HEIF Image', 'QOI Image',
+            'Blender File', 'Wavefront OBJ', 'STL 3D Model', 'FBX 3D Model', 'Collada 3D Model',
+            '3D Studio Scene', '3D Manufacturing Format', 'Additive Manufacturing File',
+            'STEP 3D Model', 'IGES 3D Model', 'OpenSCAD Script', 'Wavefront Material',
+            'VRML World', 'X3D File', 'USD Scene',
+            'MP3 Audio', 'WAV Audio', 'FLAC Audio', 'AIFF Audio', 'Ogg Vorbis Audio',
+            'MPEG-4 Audio', 'Windows Media Audio', 'Monkey\'s Audio', 'MIDI Audio', 'Opus Audio',
+            'MPEG-4 Video', 'AVI Video', 'Matroska Video', 'QuickTime Video', 'Windows Media Video',
+            'Flash Video', 'WebM Video', 'MPEG Video', 'Ogg Video', 'DVD Video', 'Flash Movie',
+            'H.264 Video',
+            'ZIP Archive', 'TAR Archive', 'GZIP Archive', 'BZIP2 Archive', 'XZ Archive',
+            '7-Zip Archive', 'RAR Archive', 'ARJ Archive', 'Zstandard Archive',
+            'Windows Executable', 'DOS Executable', 'macOS Application', 'Debian Package',
+            'RPM Package', 'macOS Package', 'Windows Installer', 'Android Package',
+            'macOS Disk Image', 'ISO Disk Image', 'Disk Image', 'Toast Disk Image',
+            'Void Linux Package', 'Shared Library', 'Dynamic Link Library', 'macOS Dynamic Library',
+            'Kernel Module', 'Binary File', 'Virtual CD', 'ROS Bag File',
+            'Object File', 'Static Library', 'Libtool Object', 'Libtool Archive',
+            'LLVM Bitcode', 'LLVM IR', 'Haskell Interface', 'Python Bytecode', 'Java Bytecode',
+            'Rust Library', 'Dynamic Object', 'Dynamic Interface', 'Rust Metadata',
+            'Database File', 'SQL Script', 'CSV Data', 'TSV Data', 'Data File',
+            'Temporary File', 'Swap File', 'Process ID', 'Lock File', 'Cache File',
+            'Log File', 'Output File', 'Original Backup', 'DS_Store File',
+            'Localized Resource', 'CFUserTextEncoding', 'SCons Options', 'Timestamp File',
+            'SCons Database', 'LaTeX Make Database', 'Ctags File',
+            'README', 'Changelog', 'License', 'Copying', 'Copyright', 'Authors',
+            'Contributing', 'Contributors', 'Code of Conduct', 'Code Owners',
+            'Notice', 'Version', 'Install', 'Manifest', 'Doxygen Configuration',
+            'TODO', 'FAQ', 'Legacy',
+            'Password File', 'Shadow File', 'Standard Input', 'Standard Output', 'Standard Error',
+            'Icon File'
         ];
         
         function getCategory(key) {
@@ -526,11 +847,11 @@
             
             if (key.startsWith('*.')) {
                 const ext = key.substring(2).toLowerCase();
-                return categoryMap[ext] || 'Sonstige Datei';
+                return categoryMap[ext] || 'Other File Type';
             }
             
             if (key.startsWith('*')) return 'Pattern';
-            return 'Unbekannt';
+            return 'Unknown';
         }
         
         function parseColorValue(value) {
@@ -765,7 +1086,13 @@
                 document.body.classList.add('dark-mode');
                 document.getElementById('modeBtn').textContent = '☀️';
             }
+            
+            // Load sample LS_COLORS data for testing
+            document.getElementById('inputColors').value = 
+                "di=1;38;2;224;98;6:ex=1;38;2;255;75;0:*.txt=0;38;2;255;148;0:*.py=0;38;2;255;193;0:*.js=0;38;2;255;193;0:*.json=1;38;2;255;193;0:*.zip=1;38;2;191;91;48:*.jpg=0;38;2;191;91;48:*.png=0;38;2;191;91;48";
         });
     </script>
 </body>
 </html>
+
+
